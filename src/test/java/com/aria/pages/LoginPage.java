@@ -13,12 +13,12 @@ public class LoginPage {
         this.driver = driver;
     }
 
-    //LOCATORS - Los elementos de la pagina
+    //L O C A T O R S - Los elementos de la pagina
     private By usernameField = By.id("user-name");
     private By passwordField = By.id("password");
     private By loginButton = By.id("login-button");
 
-    //Actions - Lo que puedes hacer en esta pagina
+    //A C T I O N S - Lo que puedes hacer en esta pagina
     public void login(String username, String password)
     {
         driver.findElement(usernameField).sendKeys(username);
