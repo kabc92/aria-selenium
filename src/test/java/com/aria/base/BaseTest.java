@@ -6,6 +6,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
+import java.time.Duration;
+
 public class BaseTest {
 
         protected WebDriver driver; //in order to use this among child classes
@@ -14,6 +16,7 @@ public class BaseTest {
         public void setUp() {
             WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver();
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10)); //implicitWait - GLOBAL PARA CADA findElement()
             driver.manage().window().maximize();
         }
 
