@@ -1,5 +1,6 @@
 package com.aria.pages;
 
+import com.aria.base.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -7,21 +8,22 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class LoginPage {
+public class LoginPage extends BasePage {
 
     //Instance variable only accessible from this class
-    private WebDriver driver;
+    //private WebDriver driver;
 
     //L O C A T O R S - Los elementos de la pagina
-    private By usernameField = By.id("user-name");
-    private By passwordField = By.id("password");
-    private By loginButton = By.id("login-button");
-    private By errorMessage = By.cssSelector("[data-test= 'error']");
-    private By inventoryContainer = By.id("inventory_container");
+    private final By usernameField = By.id("user-name");
+    private final By passwordField = By.id("password");
+    private final By loginButton = By.id("login-button");
+    private final By errorMessage = By.cssSelector("[data-test= 'error']");
+    private final By inventoryContainer = By.id("inventory_container");
 
-    //CONSTRUCTOR - recibe el driver de BaseTest
+    //CONSTRUCTOR - recibe el driver de BasePage?
     public LoginPage(WebDriver driver){
-        this.driver = driver;
+        super(driver);
+        //this.driver = driver;
     }
 
     //A C T I O N S - Lo que puedes hacer en esta pagina

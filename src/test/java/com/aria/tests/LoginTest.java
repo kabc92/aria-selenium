@@ -40,7 +40,7 @@ public class LoginTest extends BaseTest {
        Assert.assertTrue(loginPage.isInventoryLoaded());
     }
 
-    @Test
+   @Test
     public void login_invalidCredentials(){
 
         loginPage.login("invalid_user", "wrong_password");
@@ -48,7 +48,7 @@ public class LoginTest extends BaseTest {
         Assert.assertEquals(loginPage.getErrorMessage(), "Epic sadface: Username and password do not match any user in this service");
     }
 
-    @Test
+   @Test
     public void login_missingPassword(){
 
         loginPage.login("invalid_user", "");
@@ -57,7 +57,7 @@ public class LoginTest extends BaseTest {
 
     }
 
-    @Test
+   @Test
     public void login_missingUsername(){
 
         loginPage.login("", "invalid-password");

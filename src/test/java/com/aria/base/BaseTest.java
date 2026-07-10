@@ -1,8 +1,10 @@
 package com.aria.base;
 
+import com.aria.utils.ScreenshotUtil;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
@@ -20,12 +22,16 @@ public class BaseTest {
             driver.manage().window().maximize();
         }
 
-        @AfterMethod
-        public void tearDown() {
-            if (driver != null) {
-                driver.quit();
-            }
+    @AfterMethod
+    public void tearDown(ITestResult result) {
+        // Screenshot automático si el test falla
+        if (result.getStatus() == ITestResult.FAILURE) {
+            ScreenshotUtil.takeScreenshot(driver, result.getName());
         }
+        //if (driver != null) {
+         //   driver.quit();
+        //}
     }
+}
 
 
