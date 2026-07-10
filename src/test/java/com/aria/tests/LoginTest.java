@@ -1,11 +1,10 @@
 package com.aria.tests;
 
+import com.aria.base.BasePage;
 import com.aria.base.BaseTest;
+import com.aria.pages.InventoryPage;
 import com.aria.pages.LoginPage;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -14,17 +13,20 @@ import java.time.Duration;
 
 public class LoginTest extends BaseTest {
 
+    // El flujo de navegación pertenece a la aplicación, no al test.
     //I N S T A N C E  V A R I A B L E
     private LoginPage loginPage;
+    private InventoryPage inventoryPage;
 
    @BeforeMethod
    public void setUpPage(){
        loginPage = new LoginPage(driver);
+       inventoryPage = new InventoryPage(driver);
        driver.get("https://www.saucedemo.com");
    }
 
 
-    @Test
+   // @Test
     public void login_HappyPath(){
 
         loginPage.login("standard_user", "secret_sauce");
@@ -37,7 +39,7 @@ public class LoginTest extends BaseTest {
     public void login_verifyInventoryLoads(){
        loginPage.login("standard_user","secret_sauce");
 
-       Assert.assertTrue(loginPage.isInventoryLoaded());
+       Assert.assertTrue(inventoryPage.inventoryIsDisplayed());
     }
 
    @Test

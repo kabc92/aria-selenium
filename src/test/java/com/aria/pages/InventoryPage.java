@@ -30,34 +30,20 @@ public class InventoryPage extends BasePage {
     }
 
     //M E T H O D S
-    public boolean isLoaded(){
-
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(inventoryContainer))
-                .isDisplayed();
+    public boolean inventoryIsDisplayed(){
+        return isDisplayed(inventoryContainer); //wait.until(ExpectedConditions.visibilityOfElementLocated(inventoryContainer)).isDisplayed();
     }
 
     public void addItemToCart(){
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(addToCartBtn))
-                .click();
+        click(addToCartBtn);
     }
 
     public String getCartCount(){
-
-        return driver.findElement(cartBadge).getText();
-
+        return getText(cartBadge); //driver.findElement(cartBadge).getText();
     }
 
     public void goToCart(){
-
-        driver.findElement(cartIcon).click();
-
+        click(cartIcon);
     }
-
-
-
-
-
-
 
 }

@@ -27,18 +27,19 @@ public class CartPage extends BasePage {
         // this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
-    public boolean isLoaded(){
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(cartContainer))
-                .isDisplayed();
+    public boolean cartContainerIsDisplayed(){
+        return isDisplayed(cartContainer);
     }
 
     public int getItemCount(){
+
         return driver.findElements(cartItems).size();
     }
 
+
+
     public void clickCheckout(){
-        wait.until(ExpectedConditions.visibilityOfElementLocated(checkout))
-                .click();
+        click(checkout);
     }
 
 

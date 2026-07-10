@@ -18,7 +18,7 @@ public class LoginPage extends BasePage {
     private final By passwordField = By.id("password");
     private final By loginButton = By.id("login-button");
     private final By errorMessage = By.cssSelector("[data-test= 'error']");
-    private final By inventoryContainer = By.id("inventory_container");
+   // private final By inventoryContainer = By.id("inventory_container");
 
     //CONSTRUCTOR - recibe el driver de BasePage?
     public LoginPage(WebDriver driver){
@@ -29,12 +29,15 @@ public class LoginPage extends BasePage {
     //A C T I O N S - Lo que puedes hacer en esta pagina
     public void login(String username, String password)
     {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(usernameField));
+       // WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        //wait.until(ExpectedConditions.visibilityOfElementLocated(usernameField));
+        type(usernameField, username);
+        type(passwordField, password);
+        click(loginButton);
 
-        driver.findElement(usernameField).sendKeys(username);
-        driver.findElement(passwordField).sendKeys(password);
-        driver.findElement(loginButton).click();
+        //driver.findElement(usernameField).sendKeys(username);
+        //driver.findElement(passwordField).sendKeys(password);
+        //driver.findElement(loginButton).click();
     }
 
     public String getTitle(){
@@ -43,15 +46,16 @@ public class LoginPage extends BasePage {
     }
 
     public String getErrorMessage(){
-        return driver.findElement(errorMessage).getText();
+        return getText(errorMessage);
     }
 
-    public boolean isInventoryLoaded(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(inventoryContainer))
-                .isDisplayed();
+    /*
+    public boolean inventoryIsDisplayed(){
+        return isDisplayed(inventoryContainer);
     }
+
+     */
+
 
 
 }
