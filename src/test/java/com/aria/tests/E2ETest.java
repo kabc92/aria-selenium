@@ -42,12 +42,8 @@ public class E2ETest extends BaseTest {
 
         // Step 4 — Proceed to checkout
         cartPage.clickCheckout();
-        //Assert.assertTrue(driver.getCurrentUrl().contains("checkout-step-one"), "Checkout page did not load");
-        System.out.println("Current URL: " + driver.getCurrentUrl());
-
-        //Assert.assertTrue(driver.getCurrentUrl().contains("checkout-step-one"), "checkout-step-one");
-
-
+        Assert.assertTrue(driver.getCurrentUrl().contains("checkout-step-one"), "Checkout page did not load");
+        //System.out.println("Current URL: " + driver.getCurrentUrl());
 
     }
 }

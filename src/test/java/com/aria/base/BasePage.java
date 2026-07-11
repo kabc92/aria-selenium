@@ -33,7 +33,7 @@ public abstract class BasePage { //No one can instantiate this class somewhere e
 
     //P A G E   A C T I O N S
     protected void click(By locator){
-        wait.until(ExpectedConditions.visibilityOfElementLocated(locator))
+        wait.until(ExpectedConditions.elementToBeClickable(locator))
                 .click();
     }
 
@@ -58,6 +58,10 @@ public abstract class BasePage { //No one can instantiate this class somewhere e
 
         //Type the desired text
         element.sendKeys(text);
+    }
+
+    protected void waitForUrlContains(String urlFragment) {
+        wait.until(ExpectedConditions.urlContains(urlFragment));
     }
 
 

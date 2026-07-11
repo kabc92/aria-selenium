@@ -40,6 +40,8 @@ public class CartPage extends BasePage {
 
     public void clickCheckout(){
         click(checkout);
+        //System.out.println("URL after checkout click: " + driver.getCurrentUrl());
+        waitForUrlContains("checkout-step-one");
     }
 
 
