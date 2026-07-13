@@ -2,6 +2,7 @@ package com.aria.tests;
 
 import com.aria.base.BaseTest;
 import com.aria.pages.CartPage;
+import com.aria.pages.CheckoutPage;
 import com.aria.pages.InventoryPage;
 import com.aria.pages.LoginPage;
 import org.testng.Assert;
@@ -13,6 +14,7 @@ public class E2ETest extends BaseTest {
     private LoginPage loginPage;
     private InventoryPage inventoryPage;
     private CartPage cartPage;
+    private CheckoutPage checkoutPage;
 
     @BeforeMethod
     public void setUpPages() {
@@ -20,6 +22,7 @@ public class E2ETest extends BaseTest {
         loginPage = new LoginPage(driver);
         inventoryPage = new InventoryPage(driver);
         cartPage = new CartPage(driver);
+        checkoutPage = new CheckoutPage(driver);
 
         driver.get("https://www.saucedemo.com");
     }
@@ -44,6 +47,16 @@ public class E2ETest extends BaseTest {
         cartPage.clickCheckout();
         Assert.assertTrue(driver.getCurrentUrl().contains("checkout-step-one"), "Checkout page did not load");
         //System.out.println("Current URL: " + driver.getCurrentUrl());
+
+        //Step5 - Now you're checking out
+        Assert.assertTrue(checkoutPage.checkoutPageIsDisplayed(), "Checkout page did not load");
+        checkoutPage.fillForm("Milo", "Barc", "75034");
+        checkoutPage.clickContinue();
+        Assert.assertTrue(driver.getCurrentUrl().contains("checkout-step-two"), "Order summary did not load");
+
+
+
+
 
     }
 }

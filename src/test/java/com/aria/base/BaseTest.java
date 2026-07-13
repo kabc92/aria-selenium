@@ -42,7 +42,7 @@ public class BaseTest {
             ScreenshotUtil.takeScreenshot(driver, result.getName());
         }
         if (driver != null) {
-            driver.quit();
+           // driver.quit();
         }
     }
 }
