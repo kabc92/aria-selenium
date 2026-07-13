@@ -1,6 +1,7 @@
 package com.aria.base;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -61,7 +62,21 @@ public abstract class BasePage { //No one can instantiate this class somewhere e
     }
 
     protected void waitForUrlContains(String urlFragment) {
+
         wait.until(ExpectedConditions.urlContains(urlFragment));
+    }
+
+
+    protected void scrollToWebElement(By locator){
+        // Wait until the element exists in the DOM
+        WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+
+        //Create JavaScript executor from the current driver
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        //Execute JavaScript to scroll the page until the provided element is visible
+        js.executeScript("arguments[0].scrollIntoView(true);" , element);
+
     }
 
 
