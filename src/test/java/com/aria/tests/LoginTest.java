@@ -5,12 +5,16 @@ import com.aria.base.BaseTest;
 import com.aria.pages.InventoryPage;
 import com.aria.pages.LoginPage;
 
+import net.bytebuddy.build.SafeVarargsPlugin;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
 
+import io.qameta.allure.*;
+@Epic("Authentication")
+@Feature("Login")
 public class LoginTest extends BaseTest {
 
     // El flujo de navegación pertenece a la aplicación, no al test.
@@ -26,7 +30,10 @@ public class LoginTest extends BaseTest {
    }
 
 
-   // @Test
+   @Test
+   @Story("Happy Path")
+   @Severity(SeverityLevel.CRITICAL)
+   @Description("Valid credentials should redirect inventory page")
     public void login_HappyPath(){
 
         loginPage.login("standard_user", "secret_sauce");
@@ -35,7 +42,6 @@ public class LoginTest extends BaseTest {
         Assert.assertEquals(currentUrl, "https://www.saucedemo.com/inventory.html");
     }
 
-    @Test
     public void login_verifyInventoryLoads(){
        loginPage.login("standard_user","secret_sauce");
 
@@ -43,6 +49,9 @@ public class LoginTest extends BaseTest {
     }
 
    @Test
+   @Story("Negative Testing")
+   @Severity(SeverityLevel.NORMAL)
+   @Description("Invalid credentials should show error message")
     public void login_invalidCredentials(){
 
         loginPage.login("invalid_user", "wrong_password");
@@ -51,6 +60,9 @@ public class LoginTest extends BaseTest {
     }
 
    @Test
+   @Story("Negative Testing")
+   @Severity(SeverityLevel.NORMAL)
+   @Description("Login with missing password should show error message")
     public void login_missingPassword(){
 
         loginPage.login("invalid_user", "");
@@ -60,6 +72,9 @@ public class LoginTest extends BaseTest {
     }
 
    @Test
+   @Story("Negative Testing")
+   @Severity(SeverityLevel.NORMAL)
+   @Description("Login with missing username should display error message")
     public void login_missingUsername(){
 
         loginPage.login("", "invalid-password");

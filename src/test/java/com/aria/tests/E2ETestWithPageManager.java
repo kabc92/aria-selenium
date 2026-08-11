@@ -7,6 +7,10 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import io.qameta.allure.*;
+
+@Epic("E2E Purchase Flow")
+@Feature("Checkout")
 public class E2ETestWithPageManager extends BaseTest {
 
     //I N S T A N C E  V A R I A B L E S
@@ -19,6 +23,9 @@ public class E2ETestWithPageManager extends BaseTest {
     }
 
     @Test
+    @Story("Complete Purchase")
+    @Description("User logs in, adds item to cart, and completes full checkout")
+    @Severity(SeverityLevel.CRITICAL)
     public void e2e_loginAddToCartAndVerify() {
 
         // Step 1 — Login
