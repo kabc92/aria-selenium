@@ -9,17 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-/*
-protected void click(By locator)
 
-protected void type(By locator, String text)
-
-protected String getText(By locator)
-
-protected boolean isDisplayed(By locator)
-
-protected WebElement find(By locator)
- */
 public abstract class BasePage { //No one can instantiate this class somewhere else "new BasePage()"
 
     //I N S T A N C E  V A R I A B L E S
@@ -37,7 +27,6 @@ public abstract class BasePage { //No one can instantiate this class somewhere e
         wait.until(ExpectedConditions.elementToBeClickable(locator))
                 .click();
     }
-
 
     protected boolean isDisplayed(By locator){
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator))
