@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class BaseTest {
 
-        protected WebDriver driver; //in order to use this among child classes
+        protected WebDriver driver; //In order to use this among child classes
 
         @BeforeMethod
         public void setUp() {
@@ -42,7 +42,7 @@ public class BaseTest {
             ScreenshotUtil.takeScreenshot(driver, result.getName());
         }
         if (driver != null) {
-           // driver.quit();
+           driver.quit();
         }
     }
 }

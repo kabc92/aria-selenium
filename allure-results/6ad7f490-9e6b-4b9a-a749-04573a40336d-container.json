@@ -1,1 +1,0 @@
-{"uuid":"6ad7f490-9e6b-4b9a-a749-04573a40336d","name":"com.aria.base.BaseTest.setUp","children":["d7d3e96d-6fcb-494a-ac6e-d8f737bc2ad0"],"description":"","befores":[{"name":"setUp","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1786483844567,"stop":1786483845635}],"afters":[],"start":1786483844567,"stop":1786483845635}
