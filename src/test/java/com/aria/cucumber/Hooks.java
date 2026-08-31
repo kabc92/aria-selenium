@@ -14,7 +14,7 @@ import java.time.Duration;
 
 // Cucumber equivalent of BaseTest — runs setup/teardown around each Scenario
 // Uses PicoContainer: TestContext is injected via constructor
-// so Hooks and Steps share the SAME driver instance (thread-safe for parallel execution)
+// so Hooks and Steps share the SAME driver instance
 public class Hooks {
 
     private final TestContext context; // single source of truth for the driver
@@ -26,7 +26,10 @@ public class Hooks {
     @Before
     public void setUp() {
 
-        WebDriver driver = DriverFactory.createDriver("chrome");//Create the driver here
+        //browser = property im looking for
+        //chrome  = default value if the property does not exist
+        String browser = System.getProperty("browser", "chrome");
+        WebDriver driver = DriverFactory.createDriver(browser);//Create the driver here
         context.setDriver(driver); // store in context so Steps can access it
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));

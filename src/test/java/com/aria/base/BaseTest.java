@@ -17,7 +17,10 @@ public class BaseTest {
         @BeforeMethod
         public void setUp() {
 
-            driver = DriverFactory.createDriver("chrome");
+            //browser = property im looking for
+            //chrome  = default value if the property does not exist
+            String browser = System.getProperty("browser","chrome");
+            driver = DriverFactory.createDriver(browser);
 
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10)); //implicitWait - GLOBAL PARA CADA findElement()
             driver.manage().window().maximize();
