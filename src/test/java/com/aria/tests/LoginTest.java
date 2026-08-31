@@ -1,16 +1,13 @@
 package com.aria.tests;
 
-import com.aria.base.BasePage;
 import com.aria.base.BaseTest;
 import com.aria.pages.InventoryPage;
 import com.aria.pages.LoginPage;
 
-import net.bytebuddy.build.SafeVarargsPlugin;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
 
 import io.qameta.allure.*;
 @Epic("Authentication")

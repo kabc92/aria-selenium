@@ -9,6 +9,7 @@ public class TestContext {
 
     //M E T H O D S
     public void setDriver(WebDriver driver){
+
         this.driver = driver;
     }
 

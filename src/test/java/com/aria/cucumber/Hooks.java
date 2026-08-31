@@ -1,18 +1,16 @@
 package com.aria.cucumber;
 
+import com.aria.driver.DriverFactory;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Allure;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+
 import java.io.ByteArrayInputStream;
 import java.time.Duration;
-import java.util.Map;
 
 // Cucumber equivalent of BaseTest — runs setup/teardown around each Scenario
 // Uses PicoContainer: TestContext is injected via constructor
@@ -27,17 +25,8 @@ public class Hooks {
 
     @Before
     public void setUp() {
-        WebDriverManager.chromedriver().setup();
 
-        // Prevent Chrome password manager popups during test execution
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--incognito", "--password-store=basic", "--disable-save-password-bubble");
-        options.setExperimentalOption("prefs", Map.of(
-                "credentials_enable_service", false,
-                "profile.password_manager_enabled", false
-        ));
-
-        WebDriver driver = new ChromeDriver(options);
+        WebDriver driver = DriverFactory.createDriver("chrome");//Create the driver here
         context.setDriver(driver); // store in context so Steps can access it
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
