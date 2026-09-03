@@ -36,7 +36,7 @@ public class DriverFactory {
                     );
             options.setExperimentalOption("prefs", Map.of(
                     "credentials_enable_service", false,
-                    "profile.password_managaer_enabled", false
+                    "profile.password_manager_enabled", false
             ));
 
             return new ChromeDriver(options);
