@@ -11,7 +11,6 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
 import java.io.ByteArrayInputStream;
-import java.time.Duration;
 
 // Cucumber equivalent of BaseTest — runs setup/teardown around each Scenario
 // Uses PicoContainer: TestContext is injected via constructor
@@ -33,9 +32,9 @@ public class Hooks {
         WebDriver driver = DriverFactory.createDriver(browser);//Create the driver here
         context.setDriver(driver); // store in context so Steps can access it
 
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
-        driver.get(ConfigReader.get("baseUrl"));//driver.get("https://www.saucedemo.com"); // starting URL for every scenario
+        driver.get(ConfigReader.get("baseUrl"));// starting URL for every scenario
     }
 
     @After
