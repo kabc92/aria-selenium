@@ -1,6 +1,7 @@
 package com.aria.tests;
 
 import com.aria.base.BaseTest;
+import com.aria.config.ConfigReader;
 import com.aria.pages.*;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -24,7 +25,7 @@ public class E2ETest extends BaseTest {
         checkoutPageOverviewPage = new CheckoutOverviewPage(driver);
 
 
-        driver.get("https://www.saucedemo.com");
+        driver.get(ConfigReader.get("baseUrl"));//driver.get("https://www.saucedemo.com");
     }
 
     @Test

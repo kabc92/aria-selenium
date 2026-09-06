@@ -1,6 +1,7 @@
 package com.aria.tests;
 
 import com.aria.base.BaseTest;
+import com.aria.config.ConfigReader;
 import com.aria.pages.*;
 import com.aria.utils.PageManager;
 import org.testng.Assert;
@@ -19,7 +20,7 @@ public class E2ETestWithPageManager extends BaseTest {
     @BeforeMethod
     public void setupPages() {
         pages = new PageManager(driver);
-        driver.get("https://www.saucedemo.com");
+        driver.get(ConfigReader.get("baseUrl"));//driver.get("https://www.saucedemo.com");
     }
 
     @Test

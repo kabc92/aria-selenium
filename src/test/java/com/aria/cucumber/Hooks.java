@@ -1,5 +1,6 @@
 package com.aria.cucumber;
 
+import com.aria.config.ConfigReader;
 import com.aria.driver.DriverFactory;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -34,7 +35,7 @@ public class Hooks {
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
-        driver.get("https://www.saucedemo.com"); // starting URL for every scenario
+        driver.get(ConfigReader.get("baseUrl"));//driver.get("https://www.saucedemo.com"); // starting URL for every scenario
     }
 
     @After

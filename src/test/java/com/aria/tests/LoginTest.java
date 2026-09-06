@@ -1,6 +1,7 @@
 package com.aria.tests;
 
 import com.aria.base.BaseTest;
+import com.aria.config.ConfigReader;
 import com.aria.pages.InventoryPage;
 import com.aria.pages.LoginPage;
 
@@ -23,7 +24,7 @@ public class LoginTest extends BaseTest {
    public void setUpPage(){
        loginPage = new LoginPage(driver);
        inventoryPage = new InventoryPage(driver);
-       driver.get("https://www.saucedemo.com");
+       driver.get(ConfigReader.get("baseUrl"));//driver.get("https://www.saucedemo.com");
    }
 
 
