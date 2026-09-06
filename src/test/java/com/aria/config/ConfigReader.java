@@ -5,6 +5,10 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /*
+
+ConfigReader: Centralizes configuration so values like the base URL
+are not hardcoded throughout the framework!
+
 Loads configuration values from config.properties and makes them
 available to the framework through get(key)
 
