@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<suite name = "Aria Test Suite" parallel = "classes" thread-count = "3">
+
+    <test name = "Aria Tests">
+
+        <classes>
+
+            <class name = "com.aria.tests.LoginTest"/>
+            <class name = "com.aria.tests.E2ETest"/>
+            <class name = "com.aria.tests.E2ETestWithPageManager"/>
+
+        </classes>
+
+    </test>
+
+</suite>

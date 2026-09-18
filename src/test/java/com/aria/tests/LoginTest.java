@@ -2,9 +2,11 @@ package com.aria.tests;
 
 import com.aria.base.BaseTest;
 import com.aria.config.ConfigReader;
+import com.aria.driver.DriverManager;
 import com.aria.pages.InventoryPage;
 import com.aria.pages.LoginPage;
 
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -22,9 +24,12 @@ public class LoginTest extends BaseTest {
 
    @BeforeMethod
    public void setUpPage(){
-       loginPage = new LoginPage(driver);
-       inventoryPage = new InventoryPage(driver);
-       driver.get(ConfigReader.get("baseUrl"));//driver.get("https://www.saucedemo.com");
+
+       WebDriver currentDriver = DriverManager.getDriver();
+
+       loginPage = new LoginPage(currentDriver);
+       inventoryPage = new InventoryPage(currentDriver);
+       currentDriver.get(ConfigReader.get("baseUrl"));//driver.get("https://www.saucedemo.com");
    }
 
 
@@ -36,7 +41,7 @@ public class LoginTest extends BaseTest {
 
         loginPage.login("standard_user", "secret_sauce");
 
-        String currentUrl = driver.getCurrentUrl();
+        String currentUrl = DriverManager.getDriver().getCurrentUrl();
         Assert.assertEquals(currentUrl, "https://www.saucedemo.com/inventory.html");
     }
 

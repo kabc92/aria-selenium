@@ -2,7 +2,9 @@ package com.aria.tests;
 
 import com.aria.base.BaseTest;
 import com.aria.config.ConfigReader;
+import com.aria.driver.DriverManager;
 import com.aria.pages.*;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -18,14 +20,16 @@ public class E2ETest extends BaseTest {
     @BeforeMethod
     public void setUpPages() {
 
-        loginPage = new LoginPage(driver);
-        inventoryPage = new InventoryPage(driver);
-        cartPage = new CartPage(driver);
-        checkoutPage = new CheckoutPage(driver);
-        checkoutPageOverviewPage = new CheckoutOverviewPage(driver);
+        WebDriver currentDriver = DriverManager.getDriver();
+
+        loginPage = new LoginPage(currentDriver);
+        inventoryPage = new InventoryPage(currentDriver);
+        cartPage = new CartPage(currentDriver);
+        checkoutPage = new CheckoutPage(currentDriver);
+        checkoutPageOverviewPage = new CheckoutOverviewPage(currentDriver);
 
 
-        driver.get(ConfigReader.get("baseUrl"));//driver.get("https://www.saucedemo.com");
+        currentDriver.get(ConfigReader.get("baseUrl"));//driver.get("https://www.saucedemo.com");
     }
 
     @Test
@@ -46,19 +50,19 @@ public class E2ETest extends BaseTest {
 
         // Step 4 — Proceed to checkout step one
         cartPage.clickCheckout();
-        Assert.assertTrue(driver.getCurrentUrl().contains("checkout-step-one"), "Checkout page did not load");
+        Assert.assertTrue(DriverManager.getDriver().getCurrentUrl().contains("checkout-step-one"), "Checkout page did not load");
         //System.out.println("Current URL: " + driver.getCurrentUrl());
 
         //Step5 - Proceed to Checkout step two
         Assert.assertTrue(checkoutPage.checkoutPageIsDisplayed(), "Checkout page did not load");
         checkoutPage.fillForm("Milo", "Barc", "75034");
         checkoutPage.clickContinue();
-        Assert.assertTrue(driver.getCurrentUrl().contains("checkout-step-two"), "Order summary did not load");
+        Assert.assertTrue(DriverManager.getDriver().getCurrentUrl().contains("checkout-step-two"), "Order summary did not load");
 
         //Step 6 - Checkout Overview
         Assert.assertTrue(checkoutPageOverviewPage.checkoutOverviewIsDisplayed(), "Overview page did not load");
         checkoutPageOverviewPage.clickFinish();
-        Assert.assertTrue(driver.getCurrentUrl().contains("checkout-complete."), "Checkout was not completed, something went wrong");
+        Assert.assertTrue(DriverManager.getDriver().getCurrentUrl().contains("checkout-complete."), "Checkout was not completed, something went wrong");
 
 
 

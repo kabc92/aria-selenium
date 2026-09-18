@@ -9,6 +9,14 @@ import java.util.Properties;
 ConfigReader: Centralizes configuration so values like the base URL
 are not hardcoded throughout the framework!
 
+ConfigReader exists to avoid hardcoding configuration values
+like the base URL across my tests.
+I keep those values in a config.properties file,
+and ConfigReader loads that resource into a Properties object
+and exposes the values through a get method.
+This centralizes configuration, so I can change
+the URL without modifying multiple tests.
+
 Loads configuration values from config.properties and makes them
 available to the framework through get(key)
 
@@ -60,7 +68,15 @@ public class ConfigReader {
     public static String get(String key){
         return properties.getProperty(key);
     }
+/*
+INTERVIEW QUESTION: how does your ConfigReader actually find and load config.properties? Walk me through that flow.
 
+RESPONSE: I use ConfigReader.class to get the ClassLoader associated with ConfigReader.
+The ClassLoader searches the classpath for config.properties,
+and getResourceAsStream() returns an InputStream for that resource.
+Then I use properties.load(input) to load the key-value pairs into a Properties object.”
+
+ */
 
 }
 
