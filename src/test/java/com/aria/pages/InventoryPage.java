@@ -3,16 +3,9 @@ package com.aria.pages;
 import com.aria.base.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 
 public class InventoryPage extends BasePage {
-
-    //I N S T A N C E  V A R I A B L E S
-    //private WebDriver driver;
-    //private WebDriverWait wait;
 
     //L O C A T O R S
     private final By inventoryContainer = By.id("inventory_container");
@@ -23,15 +16,18 @@ public class InventoryPage extends BasePage {
     //C O N S T R U C T O R
     public InventoryPage(WebDriver driver){
 
+        /*
+        PageManager creates InventoryPage and passes its WebDriver to this constructor
+        InventoryPage passes that SAME driver to BasePage through super(driver)
+        BasePage stores it, so InventoryPage can use the inherited driver
+        and BasePage's reusable Selenium methods
+         */
         super(driver);
-        //this.driver = driver;
-        //this.wait = new WebDriverWait(driver, Duration.ofSeconds(10)); // Wait 10 seconds until page loads
-
     }
 
     //M E T H O D S
     public boolean inventoryIsDisplayed(){
-        return isDisplayed(inventoryContainer); //wait.until(ExpectedConditions.visibilityOfElementLocated(inventoryContainer)).isDisplayed();
+        return isDisplayed(inventoryContainer);
     }
 
     public void addItemToCart(){
@@ -39,7 +35,7 @@ public class InventoryPage extends BasePage {
     }
 
     public String getCartCount(){
-        return getText(cartBadge); //driver.findElement(cartBadge).getText();
+        return getText(cartBadge);
     }
 
     public void goToCart(){

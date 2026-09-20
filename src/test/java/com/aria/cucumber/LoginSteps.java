@@ -25,8 +25,12 @@ public class LoginSteps {
     private final PageManager pages;
 
     // C O N S T R U C T O R  — PicoContainer calls this automatically
-    // injects the same TestContext that was injected into Hooks
-    // this is why both classes share the same driver (thread-safe)
+    // It injects the SAME scenario-scoped TestContext used by Hooks
+    // Hooks stored this Scenario's WebDriver in TestContext,
+    //so LoginSteps can access the SAME browser session.
+
+    //Each parallel Scenario gets its own TestContext
+    //which keeps its WebDriver isolated from other Scenarios
     public LoginSteps(TestContext context){
 
         this.context = context; //context.getDriver() -> gets the driver that Hooks created in @Before
