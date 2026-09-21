@@ -12,7 +12,6 @@ import org.testng.annotations.Test;
 
 import io.qameta.allure.*;
 
-import java.sql.Driver;
 
 @Epic("E2E Purchase Flow")
 @Feature("Checkout")
