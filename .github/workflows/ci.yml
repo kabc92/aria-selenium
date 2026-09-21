@@ -28,6 +28,10 @@ jobs:
           cache: 'maven'
 
       #Step 3: Runs Aria's TestNG suite in headless mode for CI execution
-      - name: Run Aria tests
+      - name: Run TestNG tests
         run: mvn clean test -Dheadless=true
+
+      #Step 4: Runs Aria's Cucumber Scenarios in parallel using the Cucumber TestNG runner
+      - name: Run Cucumber tests
+        run: mvn test -Dtest=CucumberRunnerTest -Dheadless=true
 
