@@ -1,0 +1,33 @@
+#GitHub actions reads this file to know when the Aria CI workflow
+#should run and what jobs to execute
+
+#Name displayed in the GitHub actions tab
+name: Aria CI
+
+#Triggers: Starts the Aria CI workflow when the code is pushed to the repository
+#OR when a pull request is created OR updated
+on:
+  push:
+  pull_request:
+
+jobs:
+  #JOB: Runs Aria's tests on a GitHub-Hosted Ubuntu machine
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      #Step 1: Downloads the Aria repository into the Ubuntu runner
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      #Step 2: Configures Java 21 in the Ubuntu runner to match Aria's Java version
+      - name: Set up Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+          cache: 'maven'
+
+      #Step 3: Runs Aria's TestNG suite in headless mode for CI execution
+      - name: Run Aria tests
+        run: mvn clean test -Dheadless=true
+
