@@ -249,7 +249,7 @@ Aria includes Allure integration for generating test reports.
 After generating Allure results, the report can be opened with:
 
 ```bash
-allure serve allure-results
+allure serve target/allure-results
 ```
 
 ### Failure Screenshots
