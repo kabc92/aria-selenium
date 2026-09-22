@@ -38,13 +38,7 @@ public class LoginSteps {
     }
 
     //M E T H O D S
-    /*
-    Scenario: Successful login with valid credentials
-    Given the user is on the login page
-    When the user logs in with "standard_user" and "secret_sauce"
-    Then the inventory page should be displayed
 
-     */
     @Given("the user is on the login page")
     public void the_user_is_on_the_login_page(){
         Assert.assertEquals(context.getDriver().getTitle(), "Swag Labs");
