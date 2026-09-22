@@ -301,10 +301,14 @@ This flow exercises multiple Page Objects and demonstrates how the framework reu
 
 ## Roadmap
 
-Aria is an evolving automation project. Future improvements may include:
+Aria V1 provides the core architecture for reusable and parallel web test automation. Future improvements may include:
 
 - Extend the framework to automate an additional web application and demonstrate reusability across projects
+- Add multi-environment configuration for QA, staging, and other execution environments
+- Improve test data management, including data isolation and cleanup for parallel execution
+- Integrate secure secrets management for credentials and sensitive configuration
 - Expand test coverage with additional scenarios and edge cases
-- Improve reporting and execution diagnostics
-- Add API test automation
-- Continue improving CI capabilities as the framework evolves
+- Improve reporting, execution diagnostics, and flaky test monitoring
+- Continue improving CI/CD capabilities with reporting, artifacts, and additional execution strategies
+- Explore distributed execution for larger test suites and remote browser infrastructure
+- Add API test automation as an additional framework capability
