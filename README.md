@@ -26,6 +26,8 @@ The current implementation automates the SauceDemo application, covering login v
 - Scenario-scoped dependency injection with PicoContainer
 - Reusable PageManager with page caching
 - Explicit waits and reusable Selenium actions through BasePage
+- Environment-based configuration through Java system properties
+- Fail-fast configuration validation before WebDriver creation
 - Configurable headless Chrome execution for local and CI environments
 - Automatic screenshots on test failures
 - Allure reporting integration
@@ -103,7 +105,7 @@ src/test/java/com/aria
 src/test/resources
 ├── features
 │   └── login.feature
-├── config.properties
+├── config-default.properties
 └── allure.properties
 ```
 
@@ -200,12 +202,12 @@ This ensures that both execution approaches are automatically validated whenever
 
 ## Configuration
 
-Aria uses configuration files and Java system properties to separate test settings from the framework code.
+Aria uses environment-based configuration and Java system properties to separate test settings from the framework code.
 
-The application URL is defined in:
+By default, the framework loads: 
 
 ```text
-src/test/resources/config.properties
+src/test/resources/config-default.properties
 ```
 
 Example:
@@ -213,6 +215,44 @@ Example:
 ```properties
 baseUrl=https://www.saucedemo.com/
 ```
+
+### Environment Selection
+
+The execution environment can be selected through the `env` Java system property.
+
+When no environment is provided, Aria uses `default`:
+
+```bash
+mvn clean test
+```
+
+This loads:
+
+```text
+config-default.properties
+```
+
+Additional environments can be added by creating configuration files that follow the same naming convention:
+
+```text
+config-<environment>.properties
+```
+
+For example, if a staging configuration is added:
+
+```text
+config-staging.properties
+```
+
+it can be selected with:
+
+```bash
+mvn clean test -Denv=staging
+```
+
+If the selected configuration file does not exist, Aria fails before creating the WebDriver. This prevents browser resources from being created when the execution environment is not properly configured.
+
+The same environment selection mechanism is used by both TestNG tests and Cucumber scenarios.
 
 ### Browser
 
@@ -304,8 +344,6 @@ This flow exercises multiple Page Objects and demonstrates how the framework reu
 Aria V1 provides the core architecture for reusable and parallel web test automation. Future improvements may include:
 
 - Extend the framework to automate an additional web application and demonstrate reusability across projects
-- Add multi-environment configuration for QA, staging, and other execution environments
-- Improve test data management, including data isolation and cleanup for parallel execution
 - Integrate secure secrets management for credentials and sensitive configuration
 - Expand test coverage with additional scenarios and edge cases
 - Improve reporting, execution diagnostics, and flaky test monitoring

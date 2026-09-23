@@ -29,9 +29,14 @@ public class Hooks {
 
         System.out.println("THREAD: " + Thread.currentThread().getId() + " | SCENARIO: " + scenario.getName());
 
+        //Validate/load configuration BEFORE creating the WebDriver
+        //Unlike BaseTest, Hooks also needs the URL later, so we store the returned value
+        String baseUrl = ConfigReader.get("baseUrl");
+
         //browser = property im looking for
         //chrome  = default value if the property does not exist
         String browser = System.getProperty("browser", "chrome");
+
         WebDriver driver = DriverFactory.createDriver(browser);//Create the driver here
         context.setDriver(driver); // store in context so Steps can access it
 

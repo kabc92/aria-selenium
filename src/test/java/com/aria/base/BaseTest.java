@@ -1,5 +1,6 @@
 package com.aria.base;
 
+import com.aria.config.ConfigReader;
 import com.aria.driver.DriverFactory;
 import com.aria.driver.DriverManager;
 import com.aria.utils.ScreenshotUtil;
@@ -20,20 +21,22 @@ public class BaseTest {
         //protected WebDriver driver; //In order to use this among child classes
         @BeforeMethod
         public void setUp() {
+
+            //Validate/load configuration before creating the WebDriver
+            ConfigReader.get("baseUrl");
+
             //browser = property im looking for
             //chrome  = default value if the property does not exist
             String browser = System.getProperty("browser","chrome");
 
-            //creates a WebDriver and temporarily stores its reference in a variable called newDriver
+            //Creates a WebDriver and temporarily stores its reference in a variable called newDriver so that it can be passed to DriverManager
             WebDriver newDriver = DriverFactory.createDriver(browser);// CREATE
+
+            //Stores the driver in ThreadLocal for the current thread
             DriverManager.setDriver(newDriver);//SET
 
+            //Retrieves the driver
             DriverManager.getDriver().manage().window().maximize();//GET
-
-            /*
-            newDriver is not another additional driver; it is a temporary variable that points
-            to the newly created WebDriver so that it can be passes to DriverManager
-             */
         }
 
     @AfterMethod
