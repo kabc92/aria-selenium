@@ -45,6 +45,10 @@ public class LoginTest extends BaseTest {
         Assert.assertEquals(currentUrl, "https://www.saucedemo.com/inventory.html");
     }
 
+    @Test
+    @Story("Happy Path")
+    @Severity(SeverityLevel.CRITICAL)
+    @Description("valid login should display the inventory page")
     public void login_verifyInventoryLoads(){
        loginPage.login("standard_user","secret_sauce");
 
