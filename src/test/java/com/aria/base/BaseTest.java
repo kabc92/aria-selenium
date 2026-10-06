@@ -29,7 +29,8 @@ public class BaseTest {
             //chrome  = default value if the property does not exist
             String browser = System.getProperty("browser","chrome");
 
-            //Creates a WebDriver and temporarily stores its reference in a variable called newDriver so that it can be passed to DriverManager
+            //Creates a WebDriver and temporarily stores its reference in
+            // a variable called newDriver so that it can be passed to DriverManager
             WebDriver newDriver = DriverFactory.createDriver(browser);// CREATE
 
             //Stores the driver in ThreadLocal for the current thread
@@ -40,17 +41,32 @@ public class BaseTest {
         }
 
     @AfterMethod
-    public void tearDown(ITestResult result) {
+    public void tearDown(ITestResult result) {//ITestResult permite consultar informacion del resultado de la ejecucion
 
+        //Get the WebDriver associated with the CURRENT THREAD
         WebDriver currentDriver = DriverManager.getDriver();
 
+        //Only perform cleanup if a WebDriver was successfully created
         if(currentDriver != null) {
-            // Screenshot automático si el test falla
-            if (result.getStatus() == ITestResult.FAILURE) {
-                ScreenshotUtil.takeScreenshot(currentDriver, result.getName());
+
+            try{
+                //if the test failed, try to capture a screenshot BEFORE closing the browser
+                if (result.getStatus() == ITestResult.FAILURE) {
+                    ScreenshotUtil.takeScreenshot(currentDriver, result.getName());
+                }
+            } finally {
+
+                //Even if taking the screenshot fails, we still need to close the browser
+                try{
+
+                    currentDriver.quit(); //close browser
+
+                } finally {
+                    //Even if quit() fails, always remove the WebDriver reference
+                    //from ThreadLocal to avoid leaving stale references behind
+                    DriverManager.removeDriver(); //delete the driver reference to the current thread
+                }
             }
-            currentDriver.quit();
-            DriverManager.removeDriver();
         }
     }
 }
